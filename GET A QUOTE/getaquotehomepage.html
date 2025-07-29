@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible ' content='IE-edge'>
+    <title>Ria Power</title>
+    <link href="https://play-lh.googleusercontent.com/qIkhTcMBIQW3E0lfxvTkukBCJlozgoL68djg_LPkdms0RtFsFh8lc9XGiCRZfPGtKVss=w400-h700-rw" rel="icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            font-family: sans-serif;
+        }
+        body{
+            background-color: #7091e6;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            flex-basis: 400px;
+            box-shadow: 0px 0px 10px 2px #ccc;
+            background-color: white;
+        }
+        .main h3{
+            padding: 20px 20px 10px 20px;
+            font-size: 30px;
+        }
+        .main form{
+            padding: 20px;
+        }
+        .form-outer{
+            margin-bottom: 20px;
+        }
+        .form-outer label{
+            display: block;
+        }
+        .form-outer input{
+            width: 100%;
+            height: 35px;
+        }
+        .form-outer button{
+            padding: 10px 0px;
+            width: 100%;
+            border-radius: 12px;
+            background-color: #3A88FE;
+            color: black;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h3>Get in touch!</h3>
+        <form  method="post" id="form">
+            <div id="res" style="color: green;font-size: 14px;"></div>
+            <div class="form-outer">
+                <label>Name </label>
+                <input type="text" name="name">
+            </div>
+            <div class="form-outer">
+                <label>Phone </label>
+                <input type="text" name="Phone">
+            </div>
+            <div class="form-outer">
+                <label>Message </label>
+                <input type="text" name="How can we help you?">
+            </div>
+            <!-- <div class="form-outer">
+                <label>Message</label>
+                <textarea rows="4" cols="50" type="message" name="message"></textarea>
+            </div> -->
+            <!-- <div class=""></div> -->
+            <div class="form-outer">
+                <button name="btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    let url='https://script.google.com/macros/s/AKfycbwtk2mA7EAdR_qb_1aOK_iGNmRZvLjFVyWAUkJXsX556MSro84E8_J7mKraZTLftYW9EA/exec'
+    let form=document.querySelector('#form');
+    form.addEventListener("submit",(e)=>{
+        e.target.btn.innerHTML="Submitting...";
+        let d=new FormData(form);
+        fetch(url,{
+            method:'POST',
+            body:d
+        }).then((res)=>res.text())
+        .then((finaLRes)=>{
+            e.target.btn.innerHTML="Submit";
+            document.getElementById("res").innerHTML=finaLRes;
+            form.reset();
+            setTimeout(()=>{
+                document.getElementById("res").innerHTML='';
+            },5000)
+        })
+        e.preventDefault();
+    })
+</script>
+</html>
